@@ -193,23 +193,22 @@ button {
   font-size: 1rem;
   color: black;
 }
-
-/* Bottom widget nav */
 .widget-nav {
   position: fixed;
-  bottom: env(safe-area-inset-bottom, 0);
+  bottom: 0;
   left: 0;
-  right: 0;
-  height: 60px;
+  width: 100vw;
+  height: 72px;
   display: flex;
-  align-items: center;
   justify-content: space-around;
-  background: rgba(0,0,0,0.6);
-  z-index: 10;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
   padding-bottom: env(safe-area-inset-bottom, 10px);
+  z-index: 100;
+  box-sizing: border-box;
 }
 
-/* Standard buttons */
+/* All buttons */
 .widget-button {
   background: none;
   border: none;
@@ -218,22 +217,37 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
   cursor: pointer;
+  z-index: 2;
 }
 
-/* The new center cart button */
+/* Raised center button (Shop) */
 .widget-button.cart {
   background: var(--primary-green);
-  width: 60px;
-  height: 60px;
-  margin-top: -20px;           /* raise it above the bar */
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: -28px;
+  z-index: 3;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  flex: 0 0 auto;
 }
+
+/* Optional: for very large phones, center the bar */
+@media (min-width: 430px) {
+  .widget-nav {
+    max-width: 430px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+  }
+}
+
 
 /* ─────────────────────────────────────────────────────────────────── */
 /* DASHBOARD SECTIONS COMMON STYLES */
