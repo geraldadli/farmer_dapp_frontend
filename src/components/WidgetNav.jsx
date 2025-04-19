@@ -4,45 +4,28 @@ import { useNavigate } from 'react-router-dom';
 
 const WidgetNav = ({ profileIcon, role, username }) => {
   const nav = useNavigate();
+  const state = { state: { role, username } };
+
+  const items = [
+    { key: 'home',   icon: '🏠', label: 'Home',  path: '/home' },
+    { key: 'wallet', icon: '💳', label: 'Wallet', path: '/cash' },
+    { key: 'shop',   icon: '🛒', label: 'Shop',  path: '/shop', isCart: true },
+    { key: 'mail',   icon: '✉️', label: 'Notification',  path: '/mail' },
+    { key: 'profile',icon: profileIcon, label: 'Profile', path: '/profile' },
+  ];
 
   return (
     <div className="widget-nav">
-      <button
-        className="widget-button"
-        onClick={() =>
-          nav('/home', { state: { role, username } })
-        }
-      >
-        <span>🏠</span>
-        <small>Home</small>
-      </button>
-      <button
-        className="widget-button"
-        onClick={() =>
-          nav('/cash', { state: { role, username } })
-        }
-      >
-        <span>💰</span>
-        <small>Cash</small>
-      </button>
-      <button
-        className="widget-button"
-        onClick={() =>
-          nav('/mail', { state: { role, username } })
-        }
-      >
-        <span>✉️</span>
-        <small>Mail</small>
-      </button>
-      <button
-        className="widget-button"
-        onClick={() =>
-          nav('/profile', { state: { role, username } })
-        }
-      >
-        <span>{profileIcon}</span>
-        <small>Profile</small>
-      </button>
+      {items.map((item) => (
+        <button
+          key={item.key}
+          className={`widget-button${item.isCart ? ' cart' : ''}`}
+          onClick={() => nav(item.path, state)}
+        >
+          <span>{item.icon}</span>
+          {!item.isCart && <small>{item.label}</small>}
+        </button>
+      ))}
     </div>
   );
 };
